@@ -1,0 +1,62 @@
+html {
+    font-size: 10px; /* px means "pixels": the base font size is now 10 pixels high  */
+    font-family: "Lato", sans-serif; /* this should be the rest of the output you got from Google fonts */
+    background-color: #d3e1f0;
+  }
+  
+  body {
+    width: 600px;
+    margin: 0 auto;
+    background-color: #d6d0c8;
+    padding: 0 40px 40px 40px;
+    border: 5px solid black;
+    font-size: 20px;
+  
+  }
+  
+  
+  h1 {
+    margin: 0;
+    padding: 20px 0;
+    color: #143347;
+    text-shadow: 1px 1px 1px black;
+    text-align: center;
+  }
+
+  #activeTasks .record {
+    border: 0;
+    background-color: #d6d0c8;
+
+  }
+
+  #doneTasks .record {
+    border: 0;
+    text-decoration: line-through;
+    background-color: #d6d0c8;
+    color :#756e66;
+  }
+  textarea:focus, input:focus{
+    outline: none;
+  }
+ /*
+  p, li {
+    line-height: 1;
+    letter-spacing: 1px;
+    font-family: "Caveat", sans-serif;
+    font-size: 30px;
+    border-spacing: 15px;
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+    
+  }
+  
+  figcaption {
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+  }
+   */

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>To Do List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet"> 
+      </head>
+  <body>
+    <h1>To Do List</h1>
+<div id= "newTask">
+    <input type="button" id="addNew" value="+">
+    <input type="text"   id="inputNew"  name="fname" value="">
+    <input type="button" id="submitNew" value="✓">
+    <input type="button" id="cancelNew" value="X">
+
+
+</div>
+<div id ="activeTasks">
+    <input type="text" class="record" data-index ="3" name="fname" value="note 1"><br>
+    <input type="text" class="record" data-index ="2" name="fname" value="note 2"><br>
+    <input type="text" class="record" data-index ="1" name="fname" value="note 3"><br>
+</div>
+<h2>Done</h2>
+<div id ="doneTasks">
+    <input type="text" class="record" data-index ="3" name="fname" value="note 4"><br>
+    <input type="text" class="record" data-index ="2" name="fname" value="note 5"><br>
+    <input type="text" class="record" data-index ="1" name="fname" value="note 6"><br>
+</div>
+    <script defer src="./scripts/main.js"></script>
+  </body>
+</html> 
