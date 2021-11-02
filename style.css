@@ -23,13 +23,13 @@ html {
     text-align: center;
   }
 
-  #activeTasks .record {
+  #activeTasks .task {
     border: 0;
     background-color: #d6d0c8;
 
   }
 
-  #doneTasks .record {
+  #doneTasks .task {
     border: 0;
     text-decoration: line-through;
     background-color: #d6d0c8;
