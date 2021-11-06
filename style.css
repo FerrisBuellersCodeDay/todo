@@ -22,7 +22,10 @@ h1 {
   text-shadow: 1px 1px 1px black;
   text-align: center;
 }
+input {
+  font-size: 45px;
 
+}
 #activeTasks .task {
   border: 0;
   background-color: #d6d0c8;
