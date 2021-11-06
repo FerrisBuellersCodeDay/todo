@@ -9,12 +9,13 @@ const doneTasksDiv = document.getElementById("doneTasks");
 let activeTasks = [];
 let doneTaks = [];
 
-/*
+
 if ("activeTasks" in localStorage && "doneTasks" in localStorage ){
  activeTasks = JSON.parse(localStorage.getItem("activeTasks"));
  doneTasks = JSON.parse(localStorage.getItem("doneTasks"));
+ appendChanges();
 }
-*/
+
 
 
 // addEventListener("click",function(event){
@@ -143,23 +144,6 @@ function createTaskElement(value, index, isDone = false)     {
     newElem.value= value;
     return newElem;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
