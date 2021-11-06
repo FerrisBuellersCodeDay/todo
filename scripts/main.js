@@ -85,7 +85,7 @@ function toggleTaskCheckBox(index, checkOrUnCheck){
 
 addEventListener("blur", function(event){
 
-if (event.target.classList.contains("task")&& !event.target.hasAttribute("readonly")){
+if (event.target.classList.contains("task")&& !(event.target.hasAttribute("readonly"))){
     if (event.target.classList.contains("done")) {
         doneTasks[event.target.dataset.index] = event.target.value;
         
@@ -106,8 +106,10 @@ addEventListener("keypress", function(event){
         addNewTask(newTaskText);
         inputNewText.value = null;
 
-    } else if ((event.key === 'Enter')&& event.target.classList.contains("task")&& !event.target.hasAttribute("readonly")) {
+    } else if ((event.key === 'Enter')&& (event.target.classList.contains("task"))&& !(event.target.hasAttribute("readonly"))) {
+        alert("blur");
         event.target.blur();
+        
     }
         
 });
