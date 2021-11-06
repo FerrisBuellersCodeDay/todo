@@ -107,7 +107,7 @@ addEventListener("keypress", function(event){
         inputNewText.value = null;
 
     } else if ((event.key === 'Enter')&& (event.target.classList.contains("task"))&& !(event.target.hasAttribute("readonly"))) {
-        alert("blur");
+        
         event.target.blur();
         
     }
