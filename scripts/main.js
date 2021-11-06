@@ -182,6 +182,7 @@ function appendChanges() {
 
         let newCheckInput = document.createElement('input');
         newCheckInput.type = "checkbox";
+        newCheckInput.checked = true;
         newCheckInput.dataset.index = index;
         newCheckInput.dataset.action = "uncheck";
 
