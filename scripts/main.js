@@ -7,7 +7,7 @@ const activeTasksDiv = document.getElementById("activeTasks");
 const doneTasksDiv = document.getElementById("doneTasks");
 
 let activeTasks = [];
-let doneTaks = [];
+let doneTasks = [];
 
 
 if ("activeTasks" in localStorage && "doneTasks" in localStorage ){
@@ -25,7 +25,7 @@ if ("activeTasks" in localStorage && "doneTasks" in localStorage ){
 // };
     // постановка курсора в конец
 //     event.preventDefault();
-//     // let cursorPos = event.target.value.length ;
+//     // let cursorPos = event.target.value.length ;   
 //     // event.target.setSelectionRange(cursorPos,cursorPos)
 //     // event.target.focus();
 // });
@@ -35,11 +35,12 @@ if ("activeTasks" in localStorage && "doneTasks" in localStorage ){
 addEventListener("click",function(event){
 let action = event.target.dataset.action;
 let index = event.target.dataset.index;
+let id  = event.target.id;
     if (action=="delete"){
         if (event.target.parentNode.classList.contains("taskDiv")){
             deleteTask(activeTasks, index);
         } else if (event.target.parentNode.classList.contains("taskDoneDiv")){
-            deleteTask(doneTaks,index);
+            deleteTask(doneTasks,index);
         }
 
     } else if (action=="edit"){
@@ -47,6 +48,12 @@ let index = event.target.dataset.index;
        
     } else if (action=="check" || action =="uncheck"){
         toggleTaskCheckBox(index, action);
+    } else if (id ==="submitNew"){
+
+        let newTaskText = inputNewText.value;
+        addNewTask(newTaskText);
+        inputNewText.value = null;
+
     }
     
 });
@@ -58,42 +65,51 @@ function toggleTaskCheckBox(index, checkOrUnCheck){
     let arrayToDetach;
     let checkedElem;
     if (checkOrUnCheck=="check"){
-        arrayToAttach= doneTaks;
+        arrayToAttach= doneTasks;
         arrayToDetach= activeTasks;
         isDone = true;
     } else if (checkOrUnCheck=="uncheck"){
         arrayToAttach= activeTasks;
-        arrayToDetach= doneTaks;
+        arrayToDetach= doneTasks;
         isDone = false;
     }       
     checkedElem = arrayToDetach[index];
-    arrayToAttach.unshift(createTaskElement(checkedElem.value, isDone));
+    arrayToAttach.unshift(checkedElem);
+    //addNewTask (checkedElem, isDone);
+    //arrayToAttach.unshift(createTaskElement(checkedElem.value, isDone));
     arrayToDetach.splice(index,1);
     appendChanges();
 
 }
 
 
-addEventListener("focusout", function(event){
+addEventListener("blur", function(event){
 
 if (event.target.classList.contains("task")&& !event.target.hasAttribute("readonly")){
     if (event.target.classList.contains("done")) {
-        doneTaks[event.target.dataset.index].value = event.target.value;
+        doneTasks[event.target.dataset.index] = event.target.value;
         
     }else {
-        activeTasks[event.target.dataset.index].value = event.target.value;
+        activeTasks[event.target.dataset.index] = event.target.value;
     }
 
-    event.target.setAttribute("readonly", true)
+    appendChanges();
+   // event.target.setAttribute("readonly", true)
 }
 } );
 
 addEventListener("keypress", function(event){
-    if (!((event.key === 'Enter')&& event.target.classList.contains("task")&& !event.target.hasAttribute("readonly"))) return;
-    event.target.blur();
-    // event.target.dispatchEvent(new Event("focusout"))
-    
-    
+
+    if ((event.key ==="Enter")&& (event.target.id ==="inputNew")){
+
+        let newTaskText = inputNewText.value;
+        addNewTask(newTaskText);
+        inputNewText.value = null;
+
+    } else if ((event.key === 'Enter')&& event.target.classList.contains("task")&& !event.target.hasAttribute("readonly")) {
+        event.target.blur();
+    }
+        
 });
 
  /*
@@ -106,13 +122,7 @@ addNewButton.onclick = function (){
 }
 */
 
-submitNewButton.onclick = function(){
-    let newTaskText = inputNewText.value;
-    addNewTask(newTaskText);
-    inputNewText.value = null;
-    
 
-}
 
 function deleteTask(arrayTasks, index){
     arrayTasks.splice(index,1);
@@ -129,10 +139,12 @@ function setCursorTask(elem){
 }
 
 
-function addNewTask(newTaskText){
-    
-    activeTasks.unshift(createTaskElement(newTaskText));
-    localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
+function addNewTask(newTaskText, isDone = true, index = 0){
+    arrayToAdd = isDone? activeTasks: doneTasks;
+
+   // arrayToAdd.unshift(createTaskElement(newTaskText));
+   arrayToAdd.unshift(newTaskText);
+
     appendChanges();
 }
 
@@ -152,8 +164,7 @@ function createTaskElement(value, index, isDone = false)     {
 function appendChanges(){
     let arrayNewTasks = [];
     activeTasks.forEach((item, index, array) =>{
-        item.dataset.index = index;
-
+        
         let newTaskDiv = document.createElement('div');
         newTaskDiv.classList = "taskDiv";
         newTaskDiv.dataset.index = index;
@@ -162,21 +173,28 @@ function appendChanges(){
         newCheckInput.type = "checkbox";
         newCheckInput.dataset.index = index;
         newCheckInput.dataset.action = "check";
+
+        let newInputElem = document.createElement('input');
+        newInputElem.type = "text";
+        newInputElem.classList = "task"; 
+        newInputElem.setAttribute("readonly", true);
+        newInputElem.dataset.index = index;
+        newInputElem.value= item;
         
 
         let newEditButton = document.createElement('input');
         newEditButton.type = "button";
-        newEditButton.name = "Edit";
+        newEditButton.value = "Edit";
         newEditButton.dataset.index = index;
         newEditButton.dataset.action = "edit";
 
         let newDeleteButton = document.createElement('input');
         newDeleteButton.type = "button";
-        newDeleteButton.name = "Delete";
+        newDeleteButton.value = "Delete";
         newDeleteButton.dataset.index = index;
         newDeleteButton.dataset.action = "delete";
         
-        newTaskDiv.append(newCheckInput, item,newEditButton,newDeleteButton);
+        newTaskDiv.append(newCheckInput, newInputElem,newEditButton,newDeleteButton);
         
         arrayNewTasks.push(newTaskDiv);
        
@@ -185,9 +203,8 @@ function appendChanges(){
      activeTasksDiv.append(...arrayNewTasks);
 
      let arrayDoneTasks = [];
-     doneTaks.forEach((item, index, array) =>{
-         item.dataset.index = index;
- 
+     doneTasks.forEach((item, index, array) =>{
+         
          let newTaskDiv = document.createElement('div');
          newTaskDiv.classList = "taskDoneDiv";
          newTaskDiv.dataset.index = index;
@@ -196,26 +213,36 @@ function appendChanges(){
          newCheckInput.type = "checkbox";
          newCheckInput.dataset.index = index;
          newCheckInput.dataset.action = "uncheck";
- 
+        
+         let newInputElem = document.createElement('input');
+         newInputElem.type = "text";
+         newInputElem.classList = "task done"; 
+         newInputElem.setAttribute("readonly", true);
+         newInputElem.dataset.index = index;
+         newInputElem.value= item;
+
          let newEditButton = document.createElement('input');
          newEditButton.type = "button";
-         newEditButton.name = "Edit";
+         newEditButton.value = "Edit";
          newEditButton.dataset.index = index;
          newEditButton.dataset.action = "edit";
  
          let newDeleteButton = document.createElement('input');
          newDeleteButton.type = "button";
-         newDeleteButton.name = "Delete";
+         newDeleteButton.value = "Delete";
          newDeleteButton.dataset.index = index;
          newDeleteButton.dataset.action = "delete";
          
-         newTaskDiv.append(newCheckInput, item,newEditButton,newDeleteButton);
+         newTaskDiv.append(newCheckInput, newInputElem,newEditButton,newDeleteButton);
          
          arrayDoneTasks.push(newTaskDiv);
         
       })
       doneTasksDiv.innerHTML ="";
       doneTasksDiv.append(...arrayDoneTasks);
+
+    localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
+    localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
 
 
 }
