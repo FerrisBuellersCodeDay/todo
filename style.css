@@ -23,26 +23,26 @@ h1 {
   text-align: center;
 }
 input {
-  font-size: 45px;
-  padding: 5px;
-  margin: 5px;
+  font-size: 35px;
+  padding: 1px;
+  margin: 1px;
 
 }
 input[type=checkbox]
 {
   /* Double-sized Checkboxes */
-  -ms-transform: scale(4); /* IE */
-  -moz-transform: scale(4); /* FF */
-  -webkit-transform: scale(4); /* Safari and Chrome */
-  -o-transform: scale(4); /* Opera */
-  transform: scale(4);
-  padding: 5px;
-  margin: 5px;
+  -ms-transform: scale(3); /* IE */
+  -moz-transform: scale(3); /* FF */
+  -webkit-transform: scale(3); /* Safari and Chrome */
+  -o-transform: scale(3); /* Opera */
+  transform: scale(3);
+  padding: 1px;
+  margin: 1px;
 }
 #activeTasks .task {
   border: 0;
   background-color: #d6d0c8;
-  font-size: 45px;
+  font-size: 35px;
   margin: 10px;
 }
 
@@ -51,7 +51,7 @@ input[type=checkbox]
   text-decoration: line-through;
   background-color: #d6d0c8;
   color :#756e66;
-  font-size: 45px;
+  font-size: 35px;
   margin: 10px;
 }
 textarea:focus, input:focus{
@@ -91,7 +91,7 @@ html {
   #activeTasks .task {
     border: 0;
     background-color: #d6d0c8;
-    font-size: 45px;
+    font-size: 35px;
   
   }
   
@@ -100,7 +100,7 @@ html {
     text-decoration: line-through;
     background-color: #d6d0c8;
     color :#756e66;
-    font-size: 45px;
+    font-size: 35px;
   }
   textarea:focus, input:focus{
     outline: none;
