@@ -96,14 +96,16 @@ addEventListener("keypress", function(event){
     
 });
 
-
+ /*
 addNewButton.onclick = function (){
-    /*inputNewText.style.visibility = 'visible';
-    addNewButton.style.visibility = 'hidden';*/
+   //inputNewText.style.visibility = 'visible';
+   // addNewButton.style.visibility = 'hidden';
     let cursorPos = inputNewText.value.length ;
     inputNewText.setSelectionRange(cursorPos,cursorPos)
     inputNewText.focus();
 }
+*/
+
 submitNewButton.onclick = function(){
     let newTaskText = inputNewText.value;
     addNewTask(newTaskText);
