@@ -164,11 +164,13 @@ function appendChanges(){
 
         let newEditButton = document.createElement('input');
         newEditButton.type = "button";
+        newEditButton.name = "Edit";
         newEditButton.dataset.index = index;
         newEditButton.dataset.action = "edit";
 
         let newDeleteButton = document.createElement('input');
         newDeleteButton.type = "button";
+        newDeleteButton.name = "Delete";
         newDeleteButton.dataset.index = index;
         newDeleteButton.dataset.action = "delete";
         
@@ -195,11 +197,13 @@ function appendChanges(){
  
          let newEditButton = document.createElement('input');
          newEditButton.type = "button";
+         newEditButton.name = "Edit";
          newEditButton.dataset.index = index;
          newEditButton.dataset.action = "edit";
  
          let newDeleteButton = document.createElement('input');
          newDeleteButton.type = "button";
+         newDeleteButton.name = "Delete";
          newDeleteButton.dataset.index = index;
          newDeleteButton.dataset.action = "delete";
          
